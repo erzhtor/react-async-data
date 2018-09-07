@@ -10,18 +10,45 @@
 npm install --save react-data-pass
 ```
 
+or
+
+```bash
+yarn add react-data-pass
+```
+
 ## Usage
 
 ```tsx
-import * as React from 'react'
-
-import MyComponent from 'react-data-pass'
+import * as React from "react";
+import ReactDataPass from "react-data-pass";
 
 class Example extends React.Component {
-  render () {
+  render() {
     return (
-      <MyComponent />
-    )
+      <ReactDataPass
+        timeout={1000}
+        update={this.state.refetch}
+        data={() => {
+          // fetch your data here
+          return { title: "some cool title" };
+        }}
+      >
+        {({ loading, error, data }) => (
+          <React.Fragment>
+            {loading && "loading"}
+            {error && "error"}
+            {data && (
+              <div>
+                {data.title}
+                <button onClick={() => this.setState({ refetch: true })}>
+                  fetch again
+                </button>
+              </div>
+            )}
+          </React.Fragment>
+        )}
+      </ReactDataPass>
+    );
   }
 }
 ```
