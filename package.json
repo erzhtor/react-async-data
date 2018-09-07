@@ -1,8 +1,8 @@
 {
   "name": "react-data-pass",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "React Data Fetch Component",
-  "author": "erzhtor",
+  "author": "Erzhan Torokulov",
   "license": "MIT",
   "repository": "erzhtor/react-data-pass",
   "main": "dist/index.js",
