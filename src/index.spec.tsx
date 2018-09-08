@@ -1,7 +1,7 @@
-import ReactDataPass from ".";
+import ReactAsyncData from ".";
 
-describe("ReactDataPass", () => {
+describe("ReactAsyncData", () => {
 	it("is truthy", () => {
-		expect(ReactDataPass).toBeTruthy();
+		expect(ReactAsyncData).toBeTruthy();
 	});
 });

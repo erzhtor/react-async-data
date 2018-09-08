@@ -1,10 +1,10 @@
 {
-  "name": "react-data-pass",
+  "name": "react-async-data",
   "version": "0.1.0",
   "description": "React Data Fetch Component",
   "author": "Erzhan Torokulov",
   "license": "MIT",
-  "repository": "erzhtor/react-data-pass",
+  "repository": "erzhtor/react-async-data",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",

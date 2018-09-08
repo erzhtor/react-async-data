@@ -1,36 +1,35 @@
-# react-data-pass
+# react-async-data
 
-> React Data Fetch Component
+> React Async Data Component
 
-[![NPM](https://img.shields.io/npm/v/react-data-pass.svg)](https://www.npmjs.com/package/react-data-pass) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-async-data.svg)](https://www.npmjs.com/package/react-async-data) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-data-pass
+npm install --save react-async-data
 ```
 
 or
 
 ```bash
-yarn add react-data-pass
+yarn add react-async-data
 ```
 
 ## Usage
 
 ```tsx
 import * as React from "react";
-import ReactDataPass from "react-data-pass";
+import ReactAsyncData from "react-async-data";
 
 class Example extends React.Component {
   render() {
     return (
-      <ReactDataPass
+      <ReactAsyncData
         timeout={1000}
-        update={this.state.refetch}
-        data={() => {
+        fetch={() => {
           // fetch your data here
-          return { title: "some cool title" };
+          return Promise.resolve({ title: "some cool title" });
         }}
       >
         {({ loading, error, data }) => (
@@ -47,7 +46,7 @@ class Example extends React.Component {
             )}
           </React.Fragment>
         )}
-      </ReactDataPass>
+      </ReactAsyncData>
     );
   }
 }

@@ -1,17 +1,45 @@
-/**
- * @class ReactDataComponent
- */
-
 import * as React from "react";
+import { IReactAsyncDataProps, ReactAsyncDataState } from "./types";
 
-import styles from "./styles.css";
+export default class ReactAsyncData<TData> extends React.Component<
+	IReactAsyncDataProps<TData>,
+	ReactAsyncDataState<TData>
+> {
+	state: ReactAsyncDataState<TData> = {
+		loading: true
+	};
 
-export type Props = { text: string };
+	constructor(props: IReactAsyncDataProps<TData>) {
+		super(props);
+		this.getData = this.getData.bind(this);
+	}
 
-export default class ReactDataComponent extends React.Component<Props> {
+	async componentWillMount() {
+		const { timeout } = this.props;
+		if (timeout) {
+			setInterval(async () => await this.getData(), timeout);
+		} else {
+			this.getData();
+		}
+	}
+
+	async getData() {
+		const { fetch } = this.props;
+		try {
+			const data = await fetch();
+			this.setState({ data, loading: false });
+		} catch (error) {
+			this.setState({ error });
+		}
+	}
+
 	render() {
-		const { text } = this.props;
-
-		return <div className={styles.test}>Example Component: {text}</div>;
+		const { children } = this.props;
+		const { data, loading, error } = this.state;
+		return children({
+			data,
+			loading,
+			error
+		});
 	}
 }

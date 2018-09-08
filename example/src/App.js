@@ -1,13 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import ExampleComponent from 'react-data-pass'
+import ReactAsyncData from "react-async-data";
 
 export default class App extends Component {
-  render () {
-    return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
-    )
-  }
+	state = {
+		counter: 0
+	};
+	render() {
+		return (
+			<div className="container">
+				<ReactAsyncData
+					timeout={1000}
+					fetch={() => {
+						const newCounter = this.state.counter + 1;
+						this.setState({ counter: newCounter });
+						return Promise.resolve(newCounter);
+					}}
+				>
+					{args => <pre>{JSON.stringify(args)}</pre>}
+				</ReactAsyncData>
+			</div>
+		);
+	}
 }

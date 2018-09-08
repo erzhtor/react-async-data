@@ -1,6 +1,6 @@
 {
-  "name": "react-data-pass-example",
-  "homepage": "https://erzhtor.github.io/react-data-pass",
+  "name": "react-async-data-example",
+  "homepage": "https://erzhtor.github.io/react-async-data",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-data-pass": "file:.."
+    "react-async-data": "file:.."
   },
   "scripts": {
     "start": "react-scripts start",
