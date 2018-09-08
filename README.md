@@ -25,12 +25,12 @@ yarn add react-async-data
 
 import Component
 
-```tsx
-import * as React from "react";
+```jsx
+import React from "react";
 import ReactAsyncData from "react-async-data";
 ```
 
-```tsx
+```jsx
 <ReactAsyncData
   timeout={1000}
   fetch={() => {
