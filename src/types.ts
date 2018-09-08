@@ -1,3 +1,5 @@
+import { FetchStatus } from "./enums";
+
 type FetchId = number | string | boolean | null;
 
 export interface IReactAsyncDataProps<TData> {
@@ -6,8 +8,7 @@ export interface IReactAsyncDataProps<TData> {
 	fetch: () => Promise<TData>;
 	children: (
 		args: {
-			loading: boolean;
-			error?: any;
+			status: FetchStatus;
 			data?: TData;
 		}
 	) => React.ReactNode;
@@ -15,8 +16,7 @@ export interface IReactAsyncDataProps<TData> {
 
 export type ReactAsyncDataState<TData> = {
 	data?: TData;
-	loading: boolean;
+	status: FetchStatus;
 	error?: any;
-	timer?: NodeJS.Timer | null;
 	fetchId?: FetchId;
 };

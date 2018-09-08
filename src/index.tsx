@@ -1,10 +1,12 @@
 import * as React from "react";
+import { FetchStatus } from "./enums";
 import { IReactAsyncDataProps, ReactAsyncDataState } from "./types";
 
 export default class ReactAsyncData<TData> extends React.Component<
 	IReactAsyncDataProps<TData>,
 	ReactAsyncDataState<TData>
 > {
+	private timer?: NodeJS.Timer | null;
 	constructor(props: IReactAsyncDataProps<TData>) {
 		super(props);
 		this.getData = this.getData.bind(this);
@@ -12,7 +14,7 @@ export default class ReactAsyncData<TData> extends React.Component<
 		this.safeStopTimer = this.safeStopTimer.bind(this);
 
 		this.state = {
-			loading: true,
+			status: FetchStatus.Loading,
 			fetchId: props.fetchId
 		};
 	}
@@ -34,55 +36,52 @@ export default class ReactAsyncData<TData> extends React.Component<
 		fetchId,
 		timeout
 	}: IReactAsyncDataProps<TData>) {
-		const { fetchId: currentFetchId, timer } = this.state;
+		const { fetchId: currentFetchId } = this.state;
 		if (fetchId !== currentFetchId) {
 			this.setState({ fetchId });
 			await this.getData();
 		}
-		if (!timer && timeout) {
+		if (!this.timer && timeout) {
 			this.startTimer(timeout);
-		} else if (timer && !timeout) {
+		} else if (this.timer && !timeout) {
 			this.safeStopTimer();
 		}
 	}
 
 	startTimer(timeout: number) {
 		this.getData();
-		const timer = setInterval(async () => await this.getData(), timeout);
-		this.setState({
-			timer
-		});
+		this.timer = setInterval(async () => await this.getData(), timeout);
 	}
 
 	safeStopTimer() {
-		const { timer } = this.state;
-		if (!timer) {
+		if (!this.timer) {
 			return;
 		}
-		clearInterval(timer);
-		this.setState({
-			timer: null
-		});
+		clearInterval(this.timer);
+		this.timer = null;
 	}
 
 	async getData() {
 		const { fetch } = this.props;
-		this.setState({ loading: true, error: undefined });
+		this.setState({ status: FetchStatus.Loading, error: undefined });
 		try {
 			const data = await fetch();
-			this.setState({ data, loading: false });
+			this.setState({ data, status: FetchStatus.Completed });
 		} catch (error) {
-			this.setState({ error, loading: false, data: undefined });
+			this.setState({
+				error,
+				status: FetchStatus.Error,
+				data: undefined
+			});
 		}
 	}
 
 	render() {
 		const { children } = this.props;
-		const { data, loading, error } = this.state;
+		const { data, status } = this.state;
 		return children({
 			data,
-			loading,
-			error
+			status
 		});
 	}
 }
