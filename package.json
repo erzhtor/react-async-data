@@ -5,6 +5,13 @@
   "author": "Erzhan Torokulov",
   "license": "MIT",
   "repository": "erzhtor/react-async-data",
+  "keywords": [
+    "react",
+    "async",
+    "fetch",
+    "request",
+    "render-props"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
