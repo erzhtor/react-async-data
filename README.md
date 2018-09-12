@@ -2,7 +2,7 @@
 
 > React Async Data Component
 
-[![NPM](https://img.shields.io/npm/v/react-async-data.svg)](https://www.npmjs.com/package/react-async-data) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/erzhtor/react-async-data.svg?branch=master)](https://travis-ci.org/erzhtor/react-async-data) [![NPM](https://img.shields.io/npm/v/react-async-data.svg)](https://www.npmjs.com/package/react-async-data) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 - Easy fetch and pass data
 - dynamic refetch based on timeout interval
