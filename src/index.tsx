@@ -79,6 +79,11 @@ export default class ReactAsyncData<TData> extends React.Component<
 	render() {
 		const { children } = this.props;
 		const { data, status } = this.state;
+
+		if (!children) {
+			return null;
+		}
+
 		return children({
 			data,
 			status
